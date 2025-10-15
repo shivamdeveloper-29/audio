@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only for Fun purpose</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    
+  <h1>Tap button</h1>
+  <button id="playBtn">Click Me!</button>
+  <audio id="myAudio" src="WhatsApp Audio 2025-10-15 at 15.20.06_8831b825.mp3"></audio>
+  <p id="message">Audio finished playing 🎧</p>
+
+
+
+
+
+
+    <script>
+
+        const playBtn = document.getElementById("playBtn");
+        const audio = document.getElementById("myAudio");
+        const message = document.getElementById("message");
+
+        playBtn.addEventListener("click", function () {
+        // Volume full rakho
+        audio.volume = 1.0;
+
+        // Audio ko loop par lagao
+      audio.loop = true;
+
+      const playPromise = audio.play();
+                  
+       if (playPromise !== undefined) {
+       playPromise.then(_ => {
+       console.log("Audio is playing...");
+       }).catch(error => {
+       console.log("Audio play failed: ", error);
+       });
+      }
+         playBtn.disabled = true;
+         playBtn.textContent = "⏳ Playing...";
+        
+        setTimeout(function() {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.loop = false;
+        playBtn.style.display = "none";  // Hide button
+        message.style.display = "block"; // Show message
+    }, 60000);
+});
+
+    </script>
+</body>
+</html>
